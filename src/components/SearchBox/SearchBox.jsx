@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import css from "./SearchBox.module.css";
 import { changeFilter } from "../../redux/filtersSlice";
-import { RiPhoneFindLine } from "react-icons/ri";
+import { selectNameFilter } from "../../redux/filtersSlice";
 
 export default function SearchBox() {
   const dispatch = useDispatch();
-  const filter = useSelector((state) => state.filters.name);
+  const filter = useSelector(selectNameFilter);
 
   const setSearchContact = (event) => {
     const searchQuery = event.target.value;
@@ -15,14 +15,12 @@ export default function SearchBox() {
   return (
     <div className={css.searchBoxContent}>
       <label htmlFor="searchBox">
-        Find contacts by name...
-        <RiPhoneFindLine className={css.icon} />
         <input
           className={css.searchBox}
           type="text"
           id="searchBox"
-          value={filter}
           onChange={setSearchContact}
+          placeholder="Search contact by name.."
         />
       </label>
     </div>

@@ -1,12 +1,11 @@
 import css from "./ContactForm.module.css";
 import { Field, Formik, Form, ErrorMessage } from "formik";
-import { v4 as uuidv4 } from "uuid";
 import { useDispatch } from "react-redux";
-import { addContact } from "../../redux/contactsSlice";
 import * as Yup from "yup";
 import { MdOutlinePhoneInTalk } from "react-icons/md";
 import { MdDriveFileRenameOutline } from "react-icons/md";
 import { IoMdPersonAdd } from "react-icons/io";
+import { addContact } from "../../redux/contactsOps";
 
 export default function ContactForm() {
   const dispatch = useDispatch();
@@ -14,7 +13,6 @@ export default function ContactForm() {
   const handleContactForm = (values, actions) => {
     dispatch(
       addContact({
-        id: uuidv4(),
         name: values.name,
         number: values.number,
       })
@@ -35,11 +33,11 @@ export default function ContactForm() {
       >
         <Form className={css.form}>
           <label htmlFor="name" className={css.formlabel}>
-            <MdDriveFileRenameOutline className={css.icon} /> Name
             <Field
               type="text"
               name="name"
               id="name"
+              placeholder="Name"
               className={css.formInput}
             />
             <ErrorMessage
@@ -49,11 +47,11 @@ export default function ContactForm() {
             />
           </label>
           <label htmlFor="number" className={css.formlabel}>
-            <MdOutlinePhoneInTalk className={css.icon} /> Number
             <Field
               type="text"
               name="number"
               id="number"
+              placeholder="Number"
               className={css.formInput}
             />
             <ErrorMessage
@@ -63,8 +61,7 @@ export default function ContactForm() {
             />
           </label>
           <button type="submit" className={css.formButton}>
-            <IoMdPersonAdd className={css.iconContact} />
-            Add concat
+            Save
           </button>
         </Form>
       </Formik>
